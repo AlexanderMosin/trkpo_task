@@ -22,7 +22,7 @@
     </build>
     <modules>
         <module>comparator</module>
-        <module>trkpo_task_03</module>
+        <module>iterator</module>
         <module>trkpo_task_04</module>
     </modules>
 

@@ -3,7 +3,7 @@
 под итераторами упорядочены и бесконечны. Необходимо вывести все элементы
 первой коллекции, которых нет во второй. Напишите junit-тесты.
  */
-package com.mosin.trkpo_03;
+package com.mosin.iterator;
 
 import java.util.ArrayList;
 import java.util.Arrays;

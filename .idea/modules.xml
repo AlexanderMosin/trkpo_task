@@ -4,8 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/comparator/comparator.iml" filepath="$PROJECT_DIR$/comparator/comparator.iml" />
       <module fileurl="file://$PROJECT_DIR$/iterator/iterator.iml" filepath="$PROJECT_DIR$/iterator/iterator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/iterator/iterator.iml" filepath="$PROJECT_DIR$/iterator/iterator.iml" />
       <module fileurl="file://$PROJECT_DIR$/trkpo_task.iml" filepath="$PROJECT_DIR$/trkpo_task.iml" />
-      <module fileurl="file://$PROJECT_DIR$/trkpo_task_03/trkpo_task_03.iml" filepath="$PROJECT_DIR$/trkpo_task_03/trkpo_task_03.iml" />
       <module fileurl="file://$PROJECT_DIR$/trkpo_task_04/trkpo_task_04.iml" filepath="$PROJECT_DIR$/trkpo_task_04/trkpo_task_04.iml" />
     </modules>
   </component>

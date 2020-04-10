@@ -6,15 +6,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="iterator" />
         <module name="comparator" />
         <module name="trkpo_task_04" />
-        <module name="trkpo_task_03" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="comparator" target="8" />
+      <module name="iterator" target="8" />
       <module name="trkpo_task" target="8" />
-      <module name="trkpo_task_03" target="8" />
       <module name="trkpo_task_04" target="8" />
     </bytecodeTargetLevel>
   </component>

@@ -1,4 +1,4 @@
-package com.mosin.trkpo_03;
+package com.mosin.iterator;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import static com.mosin.trkpo_03.Main.compareIterators;
+import static com.mosin.iterator.Main.compareIterators;
 
 public class MainTest {
 
