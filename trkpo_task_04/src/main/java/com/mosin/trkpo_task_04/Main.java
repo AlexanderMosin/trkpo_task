@@ -16,10 +16,10 @@ public class Main {
         Integer[][] arr = generateArrayOfInt(n);
         printArray(arr);
         System.out.println("Преобразовали в одномерный: ");
+        Integer[] tmp = convertToOneDimArray(arr);
         printArray(convertToOneDimArray(arr));
 
         System.out.println();
-
 
         Double[][] arrayOfDouble = generateArrayOfDouble(n);
         printArray(arrayOfDouble);
@@ -75,7 +75,7 @@ public class Main {
         System.out.println();
     }
 
-    private static <T extends Number> T[] convertToOneDimArray(T[][] array) {
+    static <T extends Number> T[] convertToOneDimArray(T[][] array) {
         T[] newArray = (T[]) new Number[array.length*array[0].length];
 
         for (int i = 0; i < array.length; i++) {
@@ -85,7 +85,7 @@ public class Main {
         return newArray;
     }
 
-    private static <T extends Number> double averageForArray(T[][] array) {
+    static <T extends Number> double averageForArray(T[][] array) {
         double sum = 0;
         int length = array.length * array.length;
         for (T[] row : array) {
@@ -96,5 +96,4 @@ public class Main {
 
         return sum/length;
     }
-
 }
