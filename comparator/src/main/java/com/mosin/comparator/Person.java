@@ -1,6 +1,5 @@
-package com.mosin.trkpo_02;
+package com.mosin.comparator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Person implements Comparable<Person> {
@@ -39,7 +38,7 @@ public class Person implements Comparable<Person> {
         }
     }
 
-    static public void printPersonList(List<Person> list) {
+    static void printPersonList(List<Person> list) {
         for (Person person : list) {
             System.out.println(person);
         }

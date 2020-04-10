@@ -7,12 +7,10 @@
 4)список, отсортированный по age
  */
 
-package com.mosin.trkpo_02;
+package com.mosin.comparator;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,7 +20,7 @@ public class Main {
         Person guitarPlayer = Person.createPerson("Darrell", "Dimebag", 33);
         Person writer2 = Person.createPerson("Gibson", "John", 29);
 
-        ArrayList<Person> listPerson = new ArrayList<Person>();
+        ArrayList<Person> listPerson = new ArrayList<>();
         listPerson.add(racer);
         listPerson.add(guitarPlayer);
         listPerson.add(writer);

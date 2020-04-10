@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>mosin.trkpo</groupId>
-    <artifactId>trkpo_task_01</artifactId>
+    <artifactId>trkpo_task</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <build>
@@ -21,7 +21,7 @@
         </plugins>
     </build>
     <modules>
-        <module>trkpo_task_02</module>
+        <module>comparator</module>
         <module>trkpo_task_03</module>
         <module>trkpo_task_04</module>
     </modules>
