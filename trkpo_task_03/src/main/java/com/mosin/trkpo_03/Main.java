@@ -31,8 +31,8 @@ public class Main {
         Integer iter1Element = (Integer) iter1.next();
         Integer iter2Element = (Integer) iter2.next();
 
-        List<Integer> uniqueElements = new ArrayList<Integer>();
-        List<Integer> repeatedElements = new ArrayList<Integer>();
+        List<Integer> uniqueElements = new ArrayList<>();
+        List<Integer> repeatedElements = new ArrayList<>();
 
         do {
             if (iter1Element < iter2Element) {

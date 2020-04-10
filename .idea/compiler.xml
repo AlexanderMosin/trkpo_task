@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="trkpo_task_04" />
         <module name="trkpo_task_03" />
         <module name="trkpo_task_02" />
       </profile>
@@ -15,6 +16,7 @@
       <module name="trkpo_task_01" target="8" />
       <module name="trkpo_task_02" target="8" />
       <module name="trkpo_task_03" target="8" />
+      <module name="trkpo_task_04" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -22,23 +22,18 @@
     </build>
     <modules>
         <module>trkpo_task_02</module>
-        <module>task_trkpo_01</module>
         <module>trkpo_task_03</module>
+        <module>trkpo_task_04</module>
     </modules>
 
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>org.junit.jupiter</groupId>-->
-<!--            <artifactId>junit-jupiter-engine</artifactId>-->
-<!--            <version>5.1.0</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>RELEASE</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
     
 </project>
