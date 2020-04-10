@@ -7,6 +7,6 @@
 
 На данный момент выполнены следующие задания:
 
-1. Два итератора (с тестами)
-2. Компаратор (с тестами)
-3. Среднее в массиве (тесты в процессе)
+1. Два итератора (с тестами) - https://github.com/AlexanderMosin/trkpo_task/tree/master/trkpo_task_03
+2. Компаратор (с тестами) - https://github.com/AlexanderMosin/trkpo_task/tree/master/comparator
+3. Среднее в массиве (тесты в процессе) - https://github.com/AlexanderMosin/trkpo_task/tree/master/trkpo_task_04
