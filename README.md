@@ -5,8 +5,10 @@
 Пытался сделать с использованием Мавена. Возможно получилось не очень хорошо. 
 Задания разбиты по пакетам с порядковыми номерами
 
+Претендую на оценку 4-5
+
 На данный момент выполнены следующие задания:
 
 1. Два итератора (с тестами) - https://github.com/AlexanderMosin/trkpo_task/tree/master/iterator
 2. Компаратор (с тестами) - https://github.com/AlexanderMosin/trkpo_task/tree/master/comparator
-3. Среднее в массиве (тесты в процессе) - https://github.com/AlexanderMosin/trkpo_task/tree/master/trkpo_task_04
+3. Среднее в массиве (c тестами) - https://github.com/AlexanderMosin/trkpo_task/tree/master/trkpo_task_04
