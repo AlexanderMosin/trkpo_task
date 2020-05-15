@@ -1,6 +1,7 @@
 package com.mosin.course;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -24,11 +25,11 @@ public class Game implements Serializable {
 
     private static final long serialVersionUID = 7627655182764925754L;
 
-    boolean isFinished = false;
+    boolean isFinished = false;                         // признак завершения игры
 
-    private Player currentPlayer;
+    private Player currentPlayer;                       // игрок, который выполняет ход
 
-    private List<Player> players = new ArrayList<>();
+    private List<Player> players = new ArrayList<>();   // список всех игроков
 
     private List<String> associationsDict;
 
@@ -38,11 +39,16 @@ public class Game implements Serializable {
         E, H
     }
 
+    public void setDifficult(Difficult difficult) {
+        this.difficult = difficult;
+    }
+
     private void addScores(int value) {
         int newScore = currentPlayer.getScore() + value;
         currentPlayer.setScore(newScore);
     }
 
+    // Переход хода к следующему игроку
     private void nextPlayer() {
         int index = players.indexOf(currentPlayer);
         if (index == players.size() - 1) {
@@ -53,6 +59,7 @@ public class Game implements Serializable {
         currentPlayer = players.get(index);
     }
 
+    // Регистрация игроков
     private void signUpPlayers() {
         String name = "";
         System.out.println("Введите имя игрока:");
@@ -70,10 +77,6 @@ public class Game implements Serializable {
         System.out.println("\nВ игре принимают участие игроки: " + Player.printPlayers(players));
     }
 
-    public void setDifficult(Difficult difficult) {
-        this.difficult = difficult;
-    }
-
     private void finishTheGame() {
         this.isFinished = true;
     }
@@ -85,8 +88,8 @@ public class Game implements Serializable {
         }
     }
 
-    // Загружаем словарь с диска в переменную
-    private List<String> getAssociationsDict() {
+    // Инициализируем словарь, загружая его с диска в переменную
+    private void initAssociationsDict() {
         String pathToFile = Constants.PATH_TO_RESOURCES + "dict.txt";
         List<String> dict = new ArrayList<>();
 
@@ -99,46 +102,25 @@ public class Game implements Serializable {
         } catch (FileNotFoundException e) {
             System.out.println("Файл " + pathToFile + " не найден");
         } catch (IOException e) {
-            System.out.println("Ошибка при чтении файла" + pathToFile);
+            System.out.println("Ошибка при чтении файла " + pathToFile);
             e.printStackTrace();
         }
 
-        return dict;
+        this.associationsDict = dict;
     }
 
     // Создание новой игры
-    public void newGame() {
+    private void newGame() {
         // Выбор сложности
         chooseDifficult();
         // Формирование списка игроков
         signUpPlayers();
         // Загрузка словаря
-        associationsDict = getAssociationsDict();
+        initAssociationsDict();
     }
 
-    private void chooseDifficult() {
-        String difficult = "";
-        Scanner input = new Scanner(System.in);
-        while (!difficult.toLowerCase().equals("e") &&
-                !difficult.toLowerCase().equals("easy") &&
-                !difficult.toLowerCase().equals("h") &&
-                !difficult.toLowerCase().equals("hard")) {
-            System.out.println("Выберите сложность\n[Легкая - введите E (Easy), тяжелая - H (Hard)]");
-            difficult = input.nextLine();
-        }
-
-        if (difficult.toLowerCase().equals("e") || difficult.toLowerCase().equals("easy")) {
-            System.out.println("Выбрана легкая сложность (E - Easy)");
-            setDifficult(Difficult.E);
-        } else if (difficult.toLowerCase().equals("h") || difficult.toLowerCase().equals("hard")) {
-            System.out.println("Выбрана тяжелая сложность (H - Hard)");
-            setDifficult(Difficult.H);
-        } else {
-            System.out.println("Выбрана некорректная сложность");
-        }
-    }
-
-    public Game loadGame(String saveFileName) {
+    // Загрузка прогресса игры из файла
+    private Game loadGame(String saveFileName) {
         Game loadGame = new Game();
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(saveFileName))) {
@@ -150,11 +132,37 @@ public class Game implements Serializable {
         return loadGame;
     }
 
-    public void gameProcessWithLoad() {
-        System.out.format("[Чтобы начать новую игру, введите %s]", Constants.NEW_GAME);
-        System.out.format("[Чтобы загрузить, введите %s]\n", Constants.LOAD_GAME);
+    private void chooseDifficult() {
+        String difficult = "";
         Scanner input = new Scanner(System.in);
-        String command = input.nextLine();
+        while (!difficult.toLowerCase().equals("e") &&
+                !difficult.toLowerCase().equals("h")) {
+            System.out.println("Выберите сложность\n[Легкая - введите E (Easy), тяжелая - H (Hard)]");
+            difficult = input.nextLine();
+        }
+
+        if (difficult.toLowerCase().equals("e")) {
+            System.out.println("Выбрана легкая сложность (E - Easy)");
+            setDifficult(Difficult.E);
+        } else if (difficult.toLowerCase().equals("h")) {
+            System.out.println("Выбрана тяжелая сложность (H - Hard)");
+            setDifficult(Difficult.H);
+        } else {
+            System.out.println("Выбрана некорректная сложность");
+        }
+    }
+
+    public void startOfTheGame() {
+        System.out.println("Начните игру");
+        Scanner input = new Scanner(System.in);
+        String command = Constants.NEW_GAME;
+        if(isSaveFiles(Constants.PATH_TO_SAVES)) {
+            System.out.format("[Чтобы начать новую игру, введите %s]", Constants.NEW_GAME);
+            System.out.format("[Чтобы загрузить игру, введите %s]\n", Constants.LOAD_GAME);
+            command = input.nextLine();
+        } else {
+            System.out.println("[Доступна только новая игра (нет сохраненных игр)]");
+        }
 
         Game game = new Game();
         switch (command.toUpperCase()) {
@@ -163,9 +171,10 @@ public class Game implements Serializable {
                 game = this;
                 break;
             case Constants.LOAD_GAME:
-                System.out.format("[Введите имя файла:]");
+                System.out.println("[Введите имя файла:]");
+                printFiles(Constants.PATH_TO_SAVES);
                 String fileName = input.nextLine();
-                game = loadGame(Constants.PATH_TO_RESOURCES + fileName);
+                game = loadGame(Constants.PATH_TO_SAVES + fileName);
                 break;
         }
         gameInProgress(game);
@@ -185,31 +194,9 @@ public class Game implements Serializable {
         game.printGameResults();
     }
 
-    public void gameProcess() {
-        // Выбор сложности
-        chooseDifficult();
-        // Формирование списка игроков
-        signUpPlayers();
-        // Формирование словаря
-        associationsDict = getAssociationsDict();
-
-        for (int i = 0; i < associationsDict.size(); i++) {
-//            GameWord gameWord = stringToGameWord(dictLine);
-            GameWord gameWord = stringToGameWord(associationsDict.get(i));
-            System.out.println("\nХодит игрок: " + currentPlayer);
-
-            int scores = round(gameWord, i);
-            addScores(scores);
-            if (isFinished) {
-                break;
-            }
-        }
-        printGameResults();
-    }
-
     private int round(GameWord gameWord, int positionInDict) {
         System.out.println("Внимание, первая ассоциация: ");
-        int award = 3;   // Базовое количество очков
+        int award = 3;                              // Базовое количество очков
         // вызываем сортировку
         // перенести ее в GameWord
         gameWord.associations = sortTheAssoc(gameWord.associations, this.difficult);
@@ -240,6 +227,7 @@ public class Game implements Serializable {
                 System.out.println("Сохранение игры");
                 award = 0;
                 saveTheGame(gameWord, positionInDict);
+                finishTheGame();
                 break;
             } else if (command.toLowerCase().equals(gameWord.word.toLowerCase())) {
                 System.out.println("Поздравляем. Вы угадали слово!!");
@@ -262,30 +250,33 @@ public class Game implements Serializable {
 
         String fileName = Player.printPlayers(players);
 
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(Constants.PATH_TO_RESOURCES + fileName + ".dat"))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(Constants.PATH_TO_SAVES + fileName + ".dat"))) {
             oos.writeObject(this);
         } catch (FileNotFoundException e) {
-            System.out.println("Файл " + Constants.PATH_TO_RESOURCES + fileName + " не найден");
+            System.out.println("Файл " + Constants.PATH_TO_SAVES + fileName + " не найден");
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        catch(Exception ex){
-//            System.out.println(ex.getMessage() + " случилась беда при сохранении");
-//        }
     }
 
-//    private void loadTheGame(String fileName) {
-//        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName))) {
-//
-//            this = (Game) ois.readObject();
-//        } catch (Exception ex) {
-//
-//            System.out.println(ex.getMessage());
-//        }
-//    }
+    private void printFiles(String path) {
+        File[] listFiles = new File(path).listFiles();
+        if (!isSaveFiles(path)) {
+            System.out.println("Нет файлов для загрузки");
+        } else {
+            assert listFiles != null;
+            for (File file : listFiles) {
+                System.out.println(file);
+            }
+        }
+    }
 
-
+    private boolean isSaveFiles(String path) {
+        File folder = new File(path);
+        File[] listFiles = folder.listFiles();
+        return listFiles.length != 0;
+    }
 
     // Сортировка мапы с ассоциациями. Для легкой сложности сортировка по убыванию частотности (сначала показываем самое популярное слово),
     // для тяжелой сложность сортировка по возврастанию частостности (сначала показываем самое непопулярное слово)
