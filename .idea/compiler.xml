@@ -8,11 +8,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="iterator" />
         <module name="comparator" />
+        <module name="course" />
         <module name="trkpo_task_04" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="comparator" target="8" />
+      <module name="course" target="8" />
       <module name="iterator" target="8" />
       <module name="trkpo_task" target="8" />
       <module name="trkpo_task_04" target="8" />
